@@ -1,5 +1,7 @@
 #include <iostream>
-#include <vector>
+#include <vector> 
+#include "MatrixMult.h"
+
 
 std::vector<std::vector<double>> NaiveMatrixMult(std::vector<std::vector<double>> A, std::vector<std::vector<double>>);
 
@@ -50,12 +52,37 @@ bool matrixDimensionsConform(std::vector<std::vector<double>> *A, std::vector<st
 }
 
 /**
- * @brief Implementation of matrix mult as essentially by the book definition
+ * @brief Creates a vector of zeros of size m x n 
+ * @param[in] rows - The number of rows in the new matrix 
+ * @param[in] cols - The number of rows in the new matrix 
  * 
+ * @return matrix of size (m x n) consisting exclusively of zeros 
+ */
+std::vector<std::vector<double>> zeros(size_t rows, size_t cols){
+    std::vector<std::vector<double>> res(rows, std::vector<double>(cols,0));
+}
+
+/**
+ * @brief Returns identity matrix of corresponding size of n x n 
+ * @param[in] n - The size of the identity matrix 
+ * 
+ * @return Identity matrix of size (n x n)
+ */
+std::vector<std::vector<double>> eye(size_t n){
+    std::vector<std::vector<double>> eye_zeros = zeros(n,n);
+    for(size_t i = 0; i < n ;i++){
+        eye_zeros.at(i).at(i)=1;
+    }
+    return eye_zeros;
+}
+
+/**
+ * @brief Implementation of matrix mult as essentially by the book definition
+ *
  * @param[in] A - the matrix we are left multiplying
  * @param[in] B - the matrix we are right multiplying
  * @result Resulting matrix product
- * 
+ *
  */
 std::vector<std::vector<double>> NaiveMatrixMult(std::vector<std::vector<double>> *A, std::vector<std::vector<double>> *B)
 {
@@ -71,11 +98,24 @@ std::vector<std::vector<double>> NaiveMatrixMult(std::vector<std::vector<double>
 
     // resulting matrix should be of size of rows of a by cols of B:
     std::vector<std::vector<double>> res(ARowCount, std::vector<double>(BColCount));
-    for(size_t i = 0; i < ARowCount;i++){
-        double curr = 0; 
+
+    // iterate over rows
+    for (size_t i = 0; i < A->size(); i++)
+    {
+
+        // iterate over cols
         std::vector<double> currRow = A->at(i);
-        for(size_t j = 0; j < BColCount;j++){
+        for (size_t j = 0; j < B->at(0).size(); j++)
+        {
+            double curr = 0;
             std::vector<double> currCol = B->at(j);
+
+            // do dot product between rows and cols
+            for (size_t k = 0; k < currCol.size(); k++)
+            {
+                curr += currRow.at(k) * currCol.at(k);
+            }
+            res.at(i).at(j) = curr;
         }
     }
 
