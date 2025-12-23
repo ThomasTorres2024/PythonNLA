@@ -1,4 +1,4 @@
-#include "MatrixMult.h"
+// #include "MatrixMult.h"
 #include <iostream>
 #include <vector>
 #include <random> //for random matrix creation
@@ -49,7 +49,9 @@ bool matrixDimensionsConform(std::vector<std::vector<double>> *A, std::vector<st
  */
 std::vector<std::vector<double>> zeros(size_t rows, size_t cols)
 {
+    
     std::vector<std::vector<double>> res(rows, std::vector<double>(cols, 0));
+    return res;
 }
 
 /**
@@ -74,6 +76,10 @@ std::vector<std::vector<double>> eye(size_t n)
  */
 std::vector<std::vector<double>> rand_n(size_t n, size_t m){
 
+    std::vector<std::vector<double>> result;
+
+    return result;
+
 }
 
 /**
@@ -81,6 +87,10 @@ std::vector<std::vector<double>> rand_n(size_t n, size_t m){
  */
 std::vector<std::vector<double>> rand(size_t n, size_t m){
 
+
+    std::vector<std::vector<double>> result;
+
+    return result;
 }
 
 /**
@@ -89,6 +99,9 @@ std::vector<std::vector<double>> rand(size_t n, size_t m){
  */
 std::vector<std::vector<double>> rand_unif(size_t n, size_t m, double lower, double upper){
 
+    std::vector<std::vector<double>> result;
+
+    return result;
 }
 
 /**
@@ -129,4 +142,17 @@ std::vector<std::vector<double>> NaiveMatrixMult(std::vector<std::vector<double>
     }
 
     return res;
+}
+
+int main(){
+
+    std::vector<std::vector<double>> id = zeros(3,4);
+
+    for (auto row: id){
+        for (auto num: row){
+            std::cout << num << " ";
+        }
+        std::cout << "\n";
+    }
+    return 0;
 }
