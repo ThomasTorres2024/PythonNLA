@@ -3,7 +3,6 @@
 #include <vector>
 #include <random> //for random matrix creation
 
-
 /**
  * @brief Checks conditions of matrix multiplication, and throws an error if the size of the matrices does not conform or if the matrices are null.
  * The point of having this as a separate function is to continue to check for new errors. We want to compute A*B in theory
@@ -49,7 +48,7 @@ bool matrixDimensionsConform(std::vector<std::vector<double>> *A, std::vector<st
  */
 std::vector<std::vector<double>> zeros(size_t rows, size_t cols)
 {
-    
+
     std::vector<std::vector<double>> res(rows, std::vector<double>(cols, 0));
     return res;
 }
@@ -63,7 +62,7 @@ std::vector<std::vector<double>> zeros(size_t rows, size_t cols)
 std::vector<std::vector<double>> eye(size_t n)
 {
     std::vector<std::vector<double>> eye_zeros = zeros(n, n);
-    //make diagonal of 1's 
+    // make diagonal of 1's
     for (size_t i = 0; i < n; i++)
     {
         eye_zeros.at(i).at(i) = 1;
@@ -72,21 +71,21 @@ std::vector<std::vector<double>> eye(size_t n)
 }
 
 /**
- * @brief Generates a matrix of size of (n x m) of ints with completely random entries 
+ * @brief Generates a matrix of size of (n x m) of ints with completely random entries
  */
-std::vector<std::vector<double>> rand_n(size_t n, size_t m){
+std::vector<std::vector<double>> rand_n(size_t n, size_t m)
+{
 
     std::vector<std::vector<double>> result;
 
     return result;
-
 }
 
 /**
  * @brief Generates a matrix of size of (n x m) with completely random entries from the uniform distribution
  */
-std::vector<std::vector<double>> rand(size_t n, size_t m){
-
+std::vector<std::vector<double>> rand(size_t n, size_t m)
+{
 
     std::vector<std::vector<double>> result;
 
@@ -94,10 +93,11 @@ std::vector<std::vector<double>> rand(size_t n, size_t m){
 }
 
 /**
- * @brief Generates a matrix of size of (n x m) with completely random entries from the uniform distribution, with entries 
+ * @brief Generates a matrix of size of (n x m) with completely random entries from the uniform distribution, with entries
  * randomly sampled from the uniform distribution on U ~ [lower, upper]
  */
-std::vector<std::vector<double>> rand_unif(size_t n, size_t m, double lower, double upper){
+std::vector<std::vector<double>> rand_unif(size_t n, size_t m, double lower, double upper)
+{
 
     std::vector<std::vector<double>> result;
 
@@ -144,12 +144,15 @@ std::vector<std::vector<double>> NaiveMatrixMult(std::vector<std::vector<double>
     return res;
 }
 
-int main(){
+int main()
+{
 
-    std::vector<std::vector<double>> id = zeros(3,4);
+    std::vector<std::vector<double>> id = zeros(3, 4);
 
-    for (auto row: id){
-        for (auto num: row){
+    for (auto row : id)
+    {
+        for (auto num : row)
+        {
             std::cout << num << " ";
         }
         std::cout << "\n";
