@@ -44,6 +44,7 @@ classDiagram
     Matrix : +SVD()
     
     Vector : -size
+    Vector : -vector[T] vector_vals
     
     Vector : + (Uniform Distribution [a,b] Constructor) Vector(size_t size, T a, T b)
     Vector : + (Random Integer Constructor on [a,b]) Vector(size_t size, int a, int b)
@@ -65,4 +66,5 @@ classDiagram
 # Motivation
 
 I wanted to provide an implementation of a lot of the algorithms I saw in my NLA course for fun with numpy. I hope to go further with a lot of the code here and potentially extend it to some lower level code I can put in a python wrapper. I included some TeX notes with everything as well since 
+
 
