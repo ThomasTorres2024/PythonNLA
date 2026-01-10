@@ -57,6 +57,13 @@ public:
      */
     Vec diff(Vec v2);
 
+    /**
+     * @brief Performs dot product between 2 vectors of conformable size
+     * @param[in] v2 New vector of matching new
+     * @return the result of doing the dot product between v1 and v2 
+     */
+    T dot(Vec v2);
+
     // Mutators
 
     void scale(T scalar);
@@ -92,10 +99,14 @@ public:
     T p_norm(size_t p);
 
     // operations for clean matrix math
-    Vec operator+(const Vec t2);
-    Vec operator-(const Vec t2);
-    Vec operator*(const Vec t2);
-    Vec operator*(T scalar);
+    Vec operator+( Vec v2);
+    Vec operator-( Vec v2);
+
+    //for scaling 
+    void operator*( T scalar);
+
+    //for dot product 
+    T operator*(Vec v2);
 
     ////////////
     // Acessors//
@@ -136,3 +147,17 @@ private:
  */
 template <typename T>
 Vec<T> zeros(size_t n);
+
+/**
+ * @brief Creates a vector of zeros with n many elements
+ * @return A corresponding zero vector with n many elements
+ */
+template <typename T>
+Vec<T> randn(size_t n, int lowerBound, int upperBound);
+
+/**
+ * @brief Creates a vector of zeros with n many elements
+ * @return A corresponding zero vector with n many elements
+ */
+template <typename T>
+Vec<T> rand_unif(size_t n );

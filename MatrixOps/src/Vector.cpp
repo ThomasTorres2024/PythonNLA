@@ -216,4 +216,77 @@ Vec<T> Vec<T>::diff(const Vec<T> v2)
     return nextVector;
 }
 
+/**
+ * @brief Performs dot product between 2 vectors of conformable size
+ * @param[in] v2 New vector of matching new
+ * @return the result of doing the dot product between v1 and v2
+ */
+template <typename T>
+T Vec<T>::dot(Vec<T> v2)
+{
+    T res = 0;
+    for (size_t i = 0; i < v2.size(); i++)
+    {
+        res += this->at(i) * v2->at(i);
+    }
+    return res;
+}
+
+
+
+// Operators
+
+/**
+ * @brief Operator overload for addition of 2 vectors
+ * @param[in] v2 A vector to add to this current vector
+ * @return Resulting vector from the sum of 2 vectors
+ */
+template <typename T>
+Vec<T> Vec<T>::operator+(Vec t2)
+{
+    return this->add(t2);
+}
+
+/**
+ * @brief Operator overload for difference of 2 vectors
+ * @param[in] v2 A vector to add to this current vector
+ * @return Resulting vector from the diff of 2 vectors (v1-v2)
+ */
+template <typename T>
+Vec<T> Vec<T>::operator-(Vec t2)
+{
+    return this->diff(t2);
+}
+
+/**
+ * @brief Operator overload for scaling a vector by some amount
+ * @param[in] scale A vector to add to this current vector
+ * @return Resulting vector from the diff of 2 vectors (v1-v2)
+ */
+template <typename T>
+void Vec<T>::operator*(T scale)
+{
+    return this->scale(scale);
+}
+
+/**
+ * @brief Operator overload for dot product operation
+ * @param[in] v A vector of the same size to do a dot product with vector
+ * @return The dot product between v1 (curr vector) and v 
+ */
+template <typename T>
+T Vec<T>::operator*(Vec<T> v)
+{
+    return this->dot(v);
+}
+
 // Static Vector Operations
+/**
+ * @brief Creates a vector of zeros with n many elements
+ * @return A corresponding zero vector with n many elements
+ */
+template <typename T>
+Vec<T> zeros(size_t n)
+{
+    return Vec<T>(0, n);
+}
