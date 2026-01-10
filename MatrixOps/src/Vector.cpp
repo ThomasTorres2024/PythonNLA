@@ -10,6 +10,8 @@
 #include "AbstractTensor.h"
 #include "Vec.h"
 #include <cmath>
+#include <random>
+#include <limits>
 
 // Constructors
 
@@ -35,6 +37,51 @@ Vec<T>::Vec(T *vals, size_t num_vals)
     for (size_t i = 0; i < num_vals; i++)
     {
         vec_elements.push_back(vals[i]);
+    }
+}
+
+// random unif constructor
+/**
+ * @brief Constructor for a vector of n elements using the uniform distribution, where
+ * the unif is on [lower,upper]
+ * @param[in] size - Size of the vector
+ * @param[in] lower - Lower bound of the distribution
+ * @param[in] upper - Upper bound of the distribution
+ */
+template<typename T>
+Vec<T>::Vec(size_t size, int lower, int upper)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> int_dist(lower, upper);
+
+    this->vec_elements(size,0);
+
+    for(size_t i=0; i < size;i++){
+        this->vec_elements.at(i)=int_dist(gen);
+    }
+}
+
+// random unif constructor
+
+/**
+ * @brief Constructor for a vector of n elements using the uniform distribution, where
+ * the unif is on [lower,upper]
+ * @param[in] size - Size of the vector
+ * @param[in] lower - Lower bound of the distribution
+ * @param[in] upper - Upper bound of the distribution
+ */
+template<typename T>
+Vec<T>::Vec(size_t size, double lower, double upper)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<double> int_dist(lower, upper);
+
+    this->vec_elements(size,0);
+
+    for(size_t i=0; i < size;i++){
+        this->vec_elements.at(i)=int_dist(gen);
     }
 }
 
@@ -232,8 +279,6 @@ T Vec<T>::dot(Vec<T> v2)
     return res;
 }
 
-
-
 // Operators
 
 /**
@@ -272,7 +317,7 @@ void Vec<T>::operator*(T scale)
 /**
  * @brief Operator overload for dot product operation
  * @param[in] v A vector of the same size to do a dot product with vector
- * @return The dot product between v1 (curr vector) and v 
+ * @return The dot product between v1 (curr vector) and v
  */
 template <typename T>
 T Vec<T>::operator*(Vec<T> v)
@@ -289,4 +334,40 @@ template <typename T>
 Vec<T> zeros(size_t n)
 {
     return Vec<T>(0, n);
+}
+
+/**
+ * @brief Creates a vector of random ints with n many elements. 
+ * The reason this is a separate function is for mat-lab like syntax.
+ * 
+ * @return A corresponding zero vector with n many elements
+ */
+template <typename T>
+Vec<T> randn(size_t n, int lower, int upper)
+{
+    return Vec<T>(n, lower,upper );
+}
+
+/**
+ * @brief Creates a vector of zeros with n many elements
+ * The reason this is a separate function is for mat-lab like syntax.
+ * 
+ * @return A corresponding zero vector with n many elements
+ */
+template <typename T>
+Vec<T> zeros(size_t n)
+{
+    return Vec<T>(0, n);
+}
+
+/**
+ * @brief Creates a vector of random reals with n many elements
+ * The reason this is a separate function is for mat-lab like syntax.
+ * 
+ * @return A corresponding zero vector with n many elements
+ */
+template <typename T>
+Vec<T> rand_unif(size_t n, double lower, double upper)
+{
+    return Vec<T>(n, lower, upper);
 }

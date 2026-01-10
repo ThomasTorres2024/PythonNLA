@@ -35,24 +35,42 @@ public:
 
     /**
      * @brief Constructor for a single value given n copies of it
-     * @param[in] val Value to copy 
-     * @param[in] copies Number of values to copy in 
+     * @param[in] val Value to copy
+     * @param[in] copies Number of values to copy in
      */
     Vec(T val, size_t copies);
-    
+
+    // Random Constructors
+
+    /**
+     * @brief Constructor for random ints, uniform distribution
+     * from lower to upper
+     * @param[in] size - Size of vector
+     * @param[in] lower - lower bound 
+     * @param[in] upper - upper bound 
+     */
+    Vec(size_t size, int lower, int upper);
+
+    /**
+     * @brief Constructor for random vals from lower to uppwer
+     * @param[in] lower - lower bound 
+     * @param[in] upper - upper bound 
+     */
+    Vec(size_t size, double lower, double upper);
+
     // underlying operations used by the operators
 
     /**
      * @brief Adds two vectors together, and produces a new vector as a result
-     * @param[in] v2 New vector of matching size 
-     * @return New vector created from adding 2 vectors together 
+     * @param[in] v2 New vector of matching size
+     * @return New vector created from adding 2 vectors together
      */
     Vec add(Vec v2);
 
     /**
-     * @brief Subtracts v2 from v1 (this vec), returns v1-v2, 
+     * @brief Subtracts v2 from v1 (this vec), returns v1-v2,
      * and produces a new vector as a result
-     * @param[in] v2 New vector of matching size 
+     * @param[in] v2 New vector of matching size
      * @return The vector formed by doing v1-v2
      */
     Vec diff(Vec v2);
@@ -60,7 +78,7 @@ public:
     /**
      * @brief Performs dot product between 2 vectors of conformable size
      * @param[in] v2 New vector of matching new
-     * @return the result of doing the dot product between v1 and v2 
+     * @return the result of doing the dot product between v1 and v2
      */
     T dot(Vec v2);
 
@@ -99,13 +117,13 @@ public:
     T p_norm(size_t p);
 
     // operations for clean matrix math
-    Vec operator+( Vec v2);
-    Vec operator-( Vec v2);
+    Vec operator+(Vec v2);
+    Vec operator-(Vec v2);
 
-    //for scaling 
-    void operator*( T scalar);
+    // for scaling
+    void operator*(T scalar);
 
-    //for dot product 
+    // for dot product
     T operator*(Vec v2);
 
     ////////////
@@ -126,7 +144,7 @@ public:
     T Vec<T>::at(size_t index);
 
     /**
-     * @brief Creates identical copy of the current vector 
+     * @brief Creates identical copy of the current vector
      */
     Vec<T> clone();
 
@@ -139,7 +157,7 @@ private:
     size_t size;
 };
 
-//Out of class methods for vectors 
+// Out of class methods for vectors
 
 /**
  * @brief Creates a vector of zeros with n many elements
@@ -160,4 +178,4 @@ Vec<T> randn(size_t n, int lowerBound, int upperBound);
  * @return A corresponding zero vector with n many elements
  */
 template <typename T>
-Vec<T> rand_unif(size_t n );
+Vec<T> rand_unif(size_t n, double lower, double upper);
