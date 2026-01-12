@@ -22,4 +22,9 @@ int main(int argc, char* argv[]){
 void testVectorInit(){
     std::vector<float> v1 = {1.0,2.0,3.0};
     Vec<float> testVec(v1);
+
+    std::cout<<testVec.norm()<<"\n";
+
+
+    std::cout<<"\n";
 }
