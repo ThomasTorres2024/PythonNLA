@@ -13,6 +13,7 @@
 
 void testMatrixConstructor(bool verb);
 void testMatrixOps(bool verb);
+void testMatrixOverloads(bool verb);
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +22,16 @@ int main(int argc, char *argv[])
     testMatrixConstructor(true);
     testMatrixOps(true);
     return 0;
+}
+
+/**
+ * @brief Tests that matrix operations occur as expected, assuming that the dimensions here are all valid, 
+ * we are using the expressions in cpp here 
+ * @param[in] verb - If we should print the results of the debugging
+ */
+void testMatrixOps(bool verb)
+{
+
 }
 
 /**

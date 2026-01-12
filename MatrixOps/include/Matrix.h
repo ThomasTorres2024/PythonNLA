@@ -140,6 +140,36 @@ public:
      */
     void set(T val, size_t i, size_t j);
 
+    // Overloaded Operators
+
+    /**
+     * @brief Operator overload for difference of 2 matrices
+     * @param[in] m matrix to add
+     * @return Resulting matrix from the difference of 2 matrices
+     */
+    Matrix operator+(Matrix m);
+
+    /**
+     * @brief Operator overload for difference of 2 matrices
+     * @param[in] m matrix to subtract
+     * @return Resulting matrix from the difference of 2 matrices
+     */
+    Matrix operator-(Matrix m);
+
+    // /**
+    //  * @brief Scales elements of the matrix by some calar
+    //  * @param[in] scalar matrix scaled by this value
+    //  */
+    // template <typename T>
+    // void operator*(T scalar);
+
+    /**
+     * @brief Operator overload for product of 2 matrices
+     * @param[in] Matrix to multiple current matrix by of conformable size
+     * @return Resulting matrix from the product of 2 matrices
+     */
+    Matrix operator*(Matrix m);
+
 private:
     size_t row;
     size_t col;
@@ -315,7 +345,6 @@ Matrix<T> Matrix<T>::prod(Matrix<T> *m)
 
     Matrix<T> nextMatrix(0, this->row, m->col);
 
-
     for (size_t i = 0; i < this->row; i++)
     {
 
@@ -330,10 +359,8 @@ Matrix<T> Matrix<T>::prod(Matrix<T> *m)
                 curr += this->at(i, k) * m->at(k, j);
             }
 
-
             // update new value
             nextMatrix.set(curr, i, j);
-
         }
     }
 
@@ -430,3 +457,49 @@ void Matrix<T>::set(T val, size_t i, size_t j)
 {
     this->matrix_vals.at(i).at(j) = val;
 }
+
+//////////////////////////////
+// Overloaded Expressions
+//////////////////////////////
+
+/**
+ * @brief Operator overload for addition of 2 matrices
+ * @param[in] Another matrix to add
+ * @return Resulting matrix from the sum of 2 matrices
+ */
+template <typename T>
+Matrix<T> Matrix<T>::operator+(Matrix<T> m)
+{
+    return this->sum(m);
+}
+
+/**
+ * @brief Operator overload for difference of 2 matrices
+ * @param[in] Another matrix to add
+ * @return Resulting matrix from the difference of 2 matrices
+ */
+template <typename T>
+Matrix<T> Matrix<T>::operator-(Matrix<T> m)
+{
+    return this->diff(m);
+}
+
+/**
+ * @brief Scales elements of the matrix by some calar
+ * @param[in] scalar matrix scaled by this value
+ */
+template <typename T>
+Matrix<T> Matrix<T>::operator*(Matrix<T> m)
+{
+    return this->scale(scalar);
+}
+
+// /**
+//  * @brief Scales elements of the matrix by some calar
+//  * @param[in] scalar matrix scaled by this value
+//  */
+// template <typename T>
+// void Matrix<T>::operator*(T scalar)
+// {
+//     return this->scale(scalar);
+// }

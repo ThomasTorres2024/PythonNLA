@@ -1,1 +1,0 @@
-g++ -std=c++23 -Iinclude test/testvec.cpp -o testvec
