@@ -309,21 +309,21 @@ Vec<T> Vec<T>::operator-(Vec t2)
  * @return Resulting vector from the diff of 2 vectors (v1-v2)
  */
 template <typename T>
-void Vec<T>::operator*(T scale)
+T Vec<T>::operator*(T scale)
 {
     return this->scale(scale);
 }
 
-/**
- * @brief Operator overload for dot product operation
- * @param[in] v A vector of the same size to do a dot product with vector
- * @return The dot product between v1 (curr vector) and v
- */
-template <typename T>
-T Vec<T>::operator*(Vec<T> v)
-{
-    return this->dot(v);
-}
+// /**
+//  * @brief Operator overload for dot product operation
+//  * @param[in] v A vector of the same size to do a dot product with vector
+//  * @return The dot product between v1 (curr vector) and v
+//  */
+// template <typename T>
+// T Vec<T>::operator*(Vec<T> v)
+// {
+//     return this->dot(v);
+// }
 
 // Static Vector Operations
 /**

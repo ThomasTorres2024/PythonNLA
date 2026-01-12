@@ -4,7 +4,7 @@
  * @brief Implementation of Vec class with NLA focus. Supports matrix-Vec operations,
  * intended to be used for implementing NLA algorithms.
  *
- * @name Thomas Torres
+ * @name Thomas Torres, Charles Booth
  * @date 1/9/26
  */
 
@@ -16,7 +16,7 @@
 #include <vector>
 
 template <typename T>
-class Vec : public AbstractTensor
+class Vec : public AbstractTensor<T>
 {
 public:
     // different constructor types
@@ -141,7 +141,7 @@ public:
      * index
      * @return value of the entry at the corresponding index
      */
-    T Vec<T>::at(size_t index);
+    Vec<T> at(size_t index);
 
     /**
      * @brief Creates identical copy of the current vector
