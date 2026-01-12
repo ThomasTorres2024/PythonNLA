@@ -29,12 +29,6 @@ public:
     Vec(std::vector<T> vals);
 
     /**
-     * @brief Constructor for fixed-size array
-     * @param[in] vals - Pointer to array of T
-     */
-    Vec(T *vals, size_t num_vals);
-
-    /**
      * @brief Constructor for a single value given n copies of it
      * @param[in] val Value to copy
      * @param[in] copies Number of values to copy in
@@ -210,17 +204,14 @@ Vec<T>::Vec(std::vector<T> vals)
 }
 
 /**
- * @brief Constructor for fixed-size array for Vec class
- * @param[in] vals - Pointer to array of T
+ * @brief Constructor for a vector of the same value repeated n many times
+ * @param[in] vals - A vector of all of the values
  */
 template <typename T>
-Vec<T>::Vec(T *vals, size_t num_vals)
+Vec<T>::Vec(T value, size_t quantity)
 {
-    this->vec_elements = std::vector<T>(num_vals);
-    for (size_t i = 0; i < num_vals; i++)
-    {
-        vec_elements.push_back(vals[i]);
-    }
+    this->vec_elements = std::vector<T>(quantity, value);
+    this->size = vec_elements.size();
 }
 
 // random unif constructor
@@ -231,17 +222,18 @@ Vec<T>::Vec(T *vals, size_t num_vals)
  * @param[in] lower - Lower bound of the distribution
  * @param[in] upper - Upper bound of the distribution
  */
-template<typename T>
+template <typename T>
 Vec<T>::Vec(size_t size, int lower, int upper)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> int_dist(lower, upper);
 
-    this->vec_elements(size,0);
+    this->vec_elements(size, 0);
 
-    for(size_t i=0; i < size;i++){
-        this->vec_elements.at(i)=int_dist(gen);
+    for (size_t i = 0; i < size; i++)
+    {
+        this->vec_elements.at(i) = int_dist(gen);
     }
 }
 
@@ -254,17 +246,18 @@ Vec<T>::Vec(size_t size, int lower, int upper)
  * @param[in] lower - Lower bound of the distribution
  * @param[in] upper - Upper bound of the distribution
  */
-template<typename T>
+template <typename T>
 Vec<T>::Vec(size_t size, double lower, double upper)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<double> int_dist(lower, upper);
 
-    this->vec_elements(size,0);
+    this->vec_elements(size, 0);
 
-    for(size_t i=0; i < size;i++){
-        this->vec_elements.at(i)=int_dist(gen);
+    for (size_t i = 0; i < size; i++)
+    {
+        this->vec_elements.at(i) = int_dist(gen);
     }
 }
 
@@ -511,21 +504,21 @@ void Vec<T>::operator*(T scalar)
 // Static Vector Operations
 
 /**
- * @brief Creates a vector of random ints with n many elements. 
+ * @brief Creates a vector of random ints with n many elements.
  * The reason this is a separate function is for mat-lab like syntax.
- * 
+ *
  * @return A corresponding zero vector with n many elements
  */
 template <typename T>
 Vec<T> randn(size_t n, int lower, int upper)
 {
-    return Vec<T>(n, lower,upper );
+    return Vec<T>(n, lower, upper);
 }
 
 /**
  * @brief Creates a vector of zeros with n many elements
  * The reason this is a separate function is for mat-lab like syntax.
- * 
+ *
  * @return A corresponding zero vector with n many elements
  */
 template <typename T>
@@ -537,7 +530,7 @@ Vec<T> zeros(size_t n)
 /**
  * @brief Creates a vector of random reals with n many elements
  * The reason this is a separate function is for mat-lab like syntax.
- * 
+ *
  * @return A corresponding zero vector with n many elements
  */
 template <typename T>
