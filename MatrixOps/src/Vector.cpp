@@ -309,7 +309,7 @@ Vec<T> Vec<T>::operator-(Vec t2)
  * @return Resulting vector from the diff of 2 vectors (v1-v2)
  */
 template <typename T>
-T Vec<T>::operator*(T scale)
+void operator*(T scale)
 {
     return this->scale(scale);
 }

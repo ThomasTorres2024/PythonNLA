@@ -20,5 +20,6 @@ int main(int argc, char* argv[]){
  * @brief Tests that vector initializations occur as expected 
  */
 void testVectorInit(){
-    Vec<double> v1(std::vector<double>{1.0, 2.0, 3.0, 4.0});
+    std::vector<float> v1 = {1.0,2.0,3.0};
+    Vec<float> testVec(v1);
 }

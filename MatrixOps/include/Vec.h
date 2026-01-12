@@ -124,7 +124,7 @@ public:
     void operator*(T scalar);
 
     // for dot product
-    T operator*(Vec v2);
+    // T operator*(Vec v2);
 
     ////////////
     // Acessors//

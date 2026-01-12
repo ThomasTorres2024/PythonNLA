@@ -16,15 +16,15 @@ public:
     virtual ~AbstractTensor();
 
     //underlying operations used by the operators 
-    virtual AbstractTensor add(const AbstractTensor t2 );
-    virtual AbstractTensor diff(const AbstractTensor t2);
+    virtual AbstractTensor add(AbstractTensor t2 );
+    virtual AbstractTensor diff(AbstractTensor t2);
     virtual void scale(T scalar);
 
-    virtual double norm();
+    virtual T norm();
 
     //operations for clean matrix math 
-    virtual AbstractTensor operator+(const AbstractTensor t2);
-    virtual AbstractTensor operator-(const AbstractTensor t2);
-    virtual AbstractTensor operator*(const AbstractTensor t2);
-    virtual AbstractTensor operator*(T scalar);
+    virtual AbstractTensor operator+(AbstractTensor t2);
+    virtual AbstractTensor operator-(AbstractTensor t2);
+    // virtual AbstractTensor operator*(AbstractTensor t2);
+    virtual void operator*(T scalar);
 };
