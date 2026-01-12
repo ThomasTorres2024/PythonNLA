@@ -9,11 +9,11 @@
  */
 
 // includes from other classes
-// #include "AbstractTensor.h"
 #include "Matrix.h"
-
-// includes for this class
 #include <vector>
+#include <cmath>
+#include <random>
+#include <limits>
 
 template <typename T>
 // class Vec : public AbstractTensor<T>
@@ -183,12 +183,6 @@ Vec<T> rand_unif(size_t n, double lower, double upper);
  * @date 1/9/26
  */
 
-#include <vector>
-// #include "AbstractTensor.h"
-#include "Vec.h"
-#include <cmath>
-#include <random>
-#include <limits>
 
 // Constructors
 
