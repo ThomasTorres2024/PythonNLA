@@ -1,36 +1,35 @@
 # Use 
 To use and test any of the heavily WIP methods, simply execute from the root directory:
-``` 
-    bash MatrixOps/scripts/build.sh
+(At the moment we only are testing things)
+```
+	#this one works:
+	MatrixOps/scripts/build_test.sh
+
+	#this is nothing atm
+    # bash MatrixOps/scripts/build.sh
 ```
 
-And then to execute the code without any parameters (parameters are WIP):
-
+And then to execute the code without any parameters (parameters are WIP, also again we only have tests atm) run from root:
 ```
+	./test 
     bash MatrixOps/scripts/exec.sh 
 ```
 
 # Current Plans 
-
-Implement AbstractTensor class as such 
-
+We decided to not use inheritance, there isn't enough overlap between the classes without just implementing
+everything as a Matrix, so, there will be no more abstract tensor here.
 
 ```mermaid
 classDiagram
-    AbstractTensor <|-- Matrix
-    AbstractTensor <|-- Vector
-	
-    AbstractTensor : +sum()
-    AbstractTensor : +diff()
-    AbstractTensor : +scale()
-    AbstractTensor : +prod()
-    AbstractTensor : +norm()
-    
     Matrix : -size_t row
     Matrix : -size_t col
     Matrix : -vector[vector[T]] matrix_vals
-    
-    
+	
+    Matrix : +sum()
+    Matrix : +diff()
+    Matrix : +scale()
+    Matrix : +prod()
+    Matrix : +norm()
     Matrix : + (Uniform Distribution [a,b] Constructor) Matrix(size_t row, size_t col, T a, T b)
     Matrix : + (Random Integer Constructor on [a,b]) Matrix(size_t row, size_t col, int a, int b)
     Matrix : + (Identity Constructor) Matrix(size_t n)
@@ -52,8 +51,11 @@ classDiagram
     Vector : + (Zero Constructor) Vector(size_t size)
     Vector : + (Vec Constructor) Vector(vector[T] info)
 	
-    
-    
+	Vector : +sum()
+    Vector : +diff()
+    Vector : +scale()
+    Vector : +prod()
+    Vector : +norm()
     Vector : +size()
     Vector : +l1_norm()
     Vector : +lp_norm(int p)
@@ -66,5 +68,6 @@ classDiagram
 # Motivation
 
 I wanted to provide an implementation of a lot of the algorithms I saw in my NLA course for fun with numpy. I hope to go further with a lot of the code here and potentially extend it to some lower level code I can put in a python wrapper. I included some TeX notes with everything as well since 
+
 
 
