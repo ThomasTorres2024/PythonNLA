@@ -74,6 +74,9 @@ classDiagram
 
 I wanted to provide an implementation of a lot of the algorithms I saw in my NLA course for fun with numpy. I hope to go further with a lot of the code here and potentially extend it to some lower level code I can put in a python wrapper. I included some TeX notes with everything as well since 
 
+---
+# TODO
+Add Householder reflector code, decent matrix multiplication algorithms (could add strassen for fun it's not very good), QR factorization algos and SVD computation as well. Equality operator for vec and matrix, matrix vector products as well
 
 
 
