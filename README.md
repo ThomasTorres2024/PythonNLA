@@ -11,7 +11,12 @@ To use and test any of the heavily WIP methods, simply execute from the root dir
 
 And then to execute the code without any parameters (parameters are WIP, also again we only have tests atm) run from root:
 ```
-	./test 
+	#for vec test class 
+	./test_vec
+
+	#for matrix text class
+	./test_matrix
+
     bash MatrixOps/scripts/exec.sh 
 ```
 
@@ -68,6 +73,7 @@ classDiagram
 # Motivation
 
 I wanted to provide an implementation of a lot of the algorithms I saw in my NLA course for fun with numpy. I hope to go further with a lot of the code here and potentially extend it to some lower level code I can put in a python wrapper. I included some TeX notes with everything as well since 
+
 
 
 
