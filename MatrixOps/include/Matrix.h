@@ -2,6 +2,9 @@
 #include "Matrix.h"
 #include "Vec.h"
 #include <vector>
+#include <cmath>
+#include <random>
+#include <limits>
 
 /**
  * @brief Implementation of Matrix class with NLA focus. Supports matrix-Vec operations,
@@ -32,16 +35,6 @@ public:
      * @param[in] b- Upper bound for uniform dist
      */
     Matrix(size_t rows, size_t cols, T a, T b);
-
-    /**
-     * @brief Constructor for matrix for size (r x c), random ints selected
-     * from [a,b]
-     * @param[in] rows - Number of Rows
-     * @param[in] cols - Number of columns
-     * @param[in] a - Lower bound for int
-     * @param[in] b- Upper bound for int
-     */
-    Matrix(size_t rows, size_t cols, int a, int b);
 
     /**
      * @brief Constructor for identity matrix of size (n x n)
@@ -135,6 +128,10 @@ private:
     std::vector<std::vector<T>> matrix_vals;
 };
 
+////////////////////
+// Constructors
+////////////////////
+
 /**
  * @brief Constructor for matrix with 2d vector
  * @param[in] vals pointer to 2d vec of values for the array
@@ -147,7 +144,82 @@ Matrix<T>::Matrix(std::vector<std::vector<T>> *vals)
     this->col = matrix_vals.at(0).size();
 }
 
+/**
+ * @brief Constructor for matrix for size (r x c), unif distribution
+ * on [a,b]
+ * @param[in] rows - Number of Rows
+ * @param[in] cols - Number of columns
+ * @param[in] a - Lower bound for uniform dist
+ * @param[in] b- Upper bound for uniform dist
+ */
+template <typename T>
+Matrix<T>::Matrix(size_t rows, size_t cols, T a, T b)
+{
+
+    // initialize to all 0's
+    this->matrix_vals = std::vector<std::vector<T>>(rows, std::vector<T>(cols, 0));
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<double> uni_dist(a, b);
+
+    // initialize random devices and set vals
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            matrix_vals.at(i).at(j) = uni_dist(gen);
+        }
+    }
+
+    // set other vals
+    this->row = rows;
+    this->col = cols;
+}
+
+/**
+ * @brief Constructor for identity matrix of size (n x n)
+ * @param[in] n - Parameter n for (n x n) identity
+ */
+template <typename T>
+Matrix<T>::Matrix(size_t n)
+{
+    this->matrix_vals = std::vector<std::vector<T>>(n, std::vector<T>(n, 0));
+    for (size_t i = 0; i < n; i++)
+    {
+        this->matrix_vals.at(i).at(i) = 1;
+    }
+
+    this->row = n;
+    this->col = n;
+};
+
+/**
+ * @brief Constructor for matrix of 1 solid value for matrix of size
+ * (row x cols)
+ * @param[in] val - Value to be repeated
+ * @param[in] rows - Number of Rows
+ * @param[in] cols - Number of columns
+ */
+template <typename T>
+Matrix<T>::Matrix(T val, size_t rows, size_t cols)
+{
+    // initialize to all 0's
+    this->matrix_vals = std::vector<std::vector<T>>(rows, std::vector<T>(cols, val));
+
+    this->row = rows;
+    this->col = cols;
+};
+
+////////////////////
+// Matrix Ops 
+////////////////////
+
+
+
+////////////////////
 // Accessors
+////////////////////
 
 /**
  * @brief Prints the matrix to console
@@ -169,17 +241,20 @@ void Matrix<T>::print()
  * @brief Computes the Frobenius norm of the matrix
  * @return The frobenius norm of the matrix
  */
-template<typename T>
-double Matrix<T>::frobenius(){
-    //for now i'm using a lazy by definition way to go about it
-    //maybe computing SVD and doing the singular values is quicker, this is just the 
-    //easy way for now 
+template <typename T>
+double Matrix<T>::frobenius()
+{
+    // for now i'm using a lazy by definition way to go about it
+    // maybe computing SVD and doing the singular values is quicker, this is just the
+    // easy way for now
 
     double res = 0;
 
-    for(auto row : this->matrix_vals){
-        for(auto v : row){
-            res+=v*v;
+    for (auto row : this->matrix_vals)
+    {
+        for (auto v : row)
+        {
+            res += v * v;
         }
     }
 
