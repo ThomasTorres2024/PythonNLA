@@ -122,6 +122,24 @@ public:
      */
     void print();
 
+    /**
+     * @brief Returns the value at the index of the matrix
+     * @param[in] i - The row of the value
+     * @param[in] j - The column of the value
+     * @return The value at the index
+     */
+    T at(size_t i, size_t j);
+
+    // mutators
+
+    /**
+     * @brief Returns the value at the index of the matrix
+     * @param[in] i - The row of the value
+     * @param[in] j - The column of the value
+     * @return The value at the index
+     */
+    void set(T val, size_t i, size_t j);
+
 private:
     size_t row;
     size_t col;
@@ -209,17 +227,134 @@ Matrix<T>::Matrix(T val, size_t rows, size_t cols)
 
     this->row = rows;
     this->col = cols;
-};
+}
 
 ////////////////////
-// Matrix Ops 
+// Matrix Ops
 ////////////////////
 
+/**
+ * @brief Returns the sum of the current matrix and incoming matrix if m
+ * if the matrices are of conformable shape
+ * @param[in] m Pointer to another matrix
+ */
+template <typename T>
+Matrix<T> Matrix<T>::sum(Matrix *m)
+{
 
+    size_t row = m->getRow();
+    size_t col = m->getCol();
+
+    // initialize to 0s when made
+    Matrix<T> res(0, row, col);
+
+    // sum 2 matrices
+    for (size_t i = 0; i < row; i++)
+    {
+        for (size_t j = 0; j < col; j++)
+        {
+            res.set(m->at(i, j) + this->at(i, j), i, j);
+        }
+    }
+
+    return res;
+}
+
+/**
+ * @brief Returns the difference of the current matrix and incoming matrix if m
+ * and the current matrices are conformable
+ * @param[in] m Pointer to another matrix
+ */
+template <typename T>
+Matrix<T> Matrix<T>::diff(Matrix *m)
+{
+
+    size_t row = m->getRow();
+    size_t col = m->getCol();
+
+    // initialize to 0s when made
+    Matrix<T> res(0, row, col);
+
+    // sum 2 matrices
+    for (size_t i = 0; i < row; i++)
+    {
+        for (size_t j = 0; j < col; j++)
+        {
+            res.set(this->at(i, j) - m->at(i, j), i, j);
+        }
+    }
+
+    return res;
+}
+
+/**
+ * @brief Scales the current vector by some amount, T
+ * @param[in] scalar - Scalar value t
+ */
+template <typename T>
+void Matrix<T>::scale(T scalar)
+{
+
+    for (size_t i = 0; i < this->row; i++)
+    {
+        for (size_t j = 0; j < this->col; j++)
+        {
+            this->matrix_vals.at(i).at(j) *= scalar;
+        }
+    }
+}
+
+/**
+ * @brief Implementation of matrix mult as essentially by the book definition
+ * @param[in] m Pointer to another matrix
+ * @return Resulting matrix from (Current x m)
+ */
+template <typename T>
+Matrix<T> Matrix<T>::prod(Matrix<T> *m)
+{
+
+    Matrix<T> nextMatrix(0, this->row, m->col);
+
+
+    for (size_t i = 0; i < this->row; i++)
+    {
+
+        for (size_t j = 0; j < m->col; j++)
+        {
+
+            T curr = 0;
+
+            // do dot product between rows and cols
+            for (size_t k = 0; k < this->col; k++)
+            {
+                curr += this->at(i, k) * m->at(k, j);
+            }
+
+
+            // update new value
+            nextMatrix.set(curr, i, j);
+
+        }
+    }
+
+    return nextMatrix;
+}
 
 ////////////////////
 // Accessors
 ////////////////////
+
+/**
+ * @brief Returns the value at the index of the matrix
+ * @param[in] i - The row of the value
+ * @param[in] j - The column of the value
+ * @return The value at the index
+ */
+template <typename T>
+T Matrix<T>::at(size_t i, size_t j)
+{
+    return this->matrix_vals.at(i).at(j);
+}
 
 /**
  * @brief Prints the matrix to console
@@ -279,4 +414,19 @@ template <typename T>
 size_t Matrix<T>::getCol()
 {
     return this->col;
+}
+
+////////////////////
+// Mutators
+////////////////////
+/**
+ * @brief Returns the value at the index of the matrix
+ * @param[in] i - The row of the value
+ * @param[in] j - The column of the value
+ * @return The value at the index
+ */
+template <typename T>
+void Matrix<T>::set(T val, size_t i, size_t j)
+{
+    this->matrix_vals.at(i).at(j) = val;
 }
