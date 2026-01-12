@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <random> //for random matrix creation
+#include <cassert>
 
 /**
  * @brief Checks conditions of matrix multiplication, and throws an error if the size of the matrices does not conform or if the matrices are null.
@@ -12,6 +13,15 @@
  * @result true Sizes conform nothing is wrong
  * @result false Sizes do not conform, something is wrong, or a matrix is null
  */
+
+class MatrixException : public std::exception {
+    std::string msg;
+public:
+    MatrixException(const std::string& message) : msg(message) {}
+    const char* what() const noexcept override { return msg.c_str(); }
+}; 
+
+
 bool matrixDimensionsConform(std::vector<std::vector<double>> *A, std::vector<std::vector<double>> *B)
 {
 
@@ -20,21 +30,25 @@ bool matrixDimensionsConform(std::vector<std::vector<double>> *A, std::vector<st
     // check if the vectors are empty or not
     if (A->size() == 0)
     {
-        std::cout << "ERROR, matrix A is empty.\n";
+        throw MatrixException("Matrix A is empty.");
     }
     else if (B->size() == 0)
     {
-        std::cout << "ERROR, matrix B is empty.\n";
+        throw MatrixException("Matrix B is empty.");
     }
     // check if the vectors are of conformable size and throw error
     else if (A->at(0).size() != B->size())
     {
-        std::cout << "ERROR. Matrix sizes do not match. Matrix A is of size: (" << A->size() << "," << A->at(0).size() << ") and matrix B is of size: (" << B->size() << B->at(0).size() << ")\n";
+        throw MatrixException ("ERROR. Matrix sizes do not match. Matrix A is of size: (" << A->size() << "," << A->at(0).size() << ") and matrix B is of size: (" << B->size() << B->at(0).size() << ")\n");
     }
     else
     {
         sizes_conform = true;
     }
+
+    assert(A->size() != 0);
+    assert(B->size() != 0);
+    assert(A->at(0).size() != B->size() != 0);
 
     return sizes_conform;
 }

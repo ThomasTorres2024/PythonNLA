@@ -29,10 +29,10 @@ int main(int argc, char *argv[])
  * we are using the expressions in cpp here 
  * @param[in] verb - If we should print the results of the debugging
  */
-void testMatrixOps(bool verb)
-{
+// void testMatrixOps(bool verb)
+// {
 
-}
+// }
 
 /**
  * @brief Tests that matrix operations occur as expected, assuming that the dimensions here are all valid

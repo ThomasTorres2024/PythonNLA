@@ -488,11 +488,11 @@ Matrix<T> Matrix<T>::operator-(Matrix<T> m)
  * @brief Scales elements of the matrix by some calar
  * @param[in] scalar matrix scaled by this value
  */
-template <typename T>
-Matrix<T> Matrix<T>::operator*(Matrix<T> m)
-{
-    return this->scale(scalar);
-}
+// template <typename T>
+// Matrix<T> Matrix<T>::operator*(Matrix<T> m)
+// {
+//     return this->scale(scalar);
+// }
 
 // /**
 //  * @brief Scales elements of the matrix by some calar

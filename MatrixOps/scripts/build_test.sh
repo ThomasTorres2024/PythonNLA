@@ -10,3 +10,5 @@ test_vector_name="$test_matrix"
 g++ -std=c++23 -IMatrixOps/include MatrixOps/test/test_vec.cpp  -o test_vec
 
 g++ -std=c++23 -IMatrixOps/include MatrixOps/test/test_matrix.cpp  -o test_matrix
+
+g++ -std=c++23 -IMatrixOps/include MatrixOps/test/unit_test.cpp  -o unit_test

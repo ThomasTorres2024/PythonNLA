@@ -147,6 +147,11 @@ public:
 
     // matrix vec operations
 
+    /**
+     * @brief Prints out every vector index
+     */
+    void print();
+
 private:
     std::vector<T> vec_elements;
     size_t size;
@@ -531,4 +536,12 @@ template <typename T>
 Vec<T> rand_unif(size_t n, double lower, double upper)
 {
     return Vec<T>(n, lower, upper);
+}
+
+template <typename T>
+void Vec<T>::print(){
+    for(auto value : this->vec_elements){
+        std::cout << value << " ";
+    }
+    std::cout << "\n";
 }
