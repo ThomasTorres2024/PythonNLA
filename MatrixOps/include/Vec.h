@@ -228,7 +228,7 @@ Vec<T>::Vec(size_t size, int lower, int upper)
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> int_dist(lower, upper);
 
-    this->vec_elements(size, 0);
+    this->vec_elements = std::vector<T>(size, 0);
 
     for (size_t i = 0; i < size; i++)
     {
@@ -252,7 +252,7 @@ Vec<T>::Vec(size_t size, double lower, double upper)
     std::mt19937 gen(rd());
     std::uniform_real_distribution<double> int_dist(lower, upper);
 
-    this->vec_elements(size, 0);
+    this->vec_elements = std::vector<T>(size, 0);
 
     for (size_t i = 0; i < size; i++)
     {
