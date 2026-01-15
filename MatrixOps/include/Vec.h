@@ -9,7 +9,6 @@
  */
 
 // includes from other classes
-#include "Matrix.h"
 #include <vector>
 #include <cmath>
 #include <random>
@@ -79,9 +78,18 @@ public:
 
     // Mutators
 
+    /**
+     * @brief Scales the vector in place by scalar
+     * @param[in] scalar - The amount the vector is scaled by
+     */
     void scale(T scalar);
 
-    // accessors
+    /**
+     * @brief Sets the value at idx of the vector to val
+     * @param[in] idx - Index of the vector
+     * @param[in] val - The value that will be changed at idx of the vector
+     */
+    void set(size_t idx, T val);
 
     /**
      * @brief Performs inplace hadamard product
@@ -188,7 +196,6 @@ Vec<T> rand_unif(size_t n, double lower, double upper);
  * @date 1/9/26
  */
 
-
 // Constructors
 
 /**
@@ -261,6 +268,16 @@ Vec<T>::Vec(size_t size, double lower, double upper)
 }
 
 // Mutators
+
+/**
+ * @brief Sets the value at idx of the vector to val
+ * @param[in] idx - Index of the vector
+ * @param[in] val - The value that will be changed at idx of the vector
+ */
+template<typename T>
+void Vec<T>::set(size_t idx, T val){
+    this->vec_elements.at(idx)=val;
+}
 
 /**
  * @brief Scales each value of the vector by some amount
@@ -539,8 +556,10 @@ Vec<T> rand_unif(size_t n, double lower, double upper)
 }
 
 template <typename T>
-void Vec<T>::print(){
-    for(auto value : this->vec_elements){
+void Vec<T>::print()
+{
+    for (auto value : this->vec_elements)
+    {
         std::cout << value << " ";
     }
     std::cout << "\n";

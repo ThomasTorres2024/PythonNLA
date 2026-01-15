@@ -2,11 +2,7 @@
 To use and test any of the heavily WIP methods, simply execute from the root directory:
 (At the moment we only are testing things)
 ```
-	#this one works:
-	MatrixOps/scripts/build_test.sh
-
-	#this is nothing atm
-    # bash MatrixOps/scripts/build.sh
+	bash MatrixOps/scripts/build_test.sh
 ```
 
 And then to execute the code without any parameters (parameters are WIP, also again we only have tests atm) run from root:
@@ -17,7 +13,8 @@ And then to execute the code without any parameters (parameters are WIP, also ag
 	#for matrix text class
 	./test_matrix
 
-    bash MatrixOps/scripts/exec.sh 
+    #
+    ./unit_test
 ```
 
 # Current Plans 

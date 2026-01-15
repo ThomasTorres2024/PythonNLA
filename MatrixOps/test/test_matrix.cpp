@@ -21,18 +21,41 @@ int main(int argc, char *argv[])
     // all of these passed so far
     testMatrixConstructor(true);
     testMatrixOps(true);
+    testMatrixOverloads(true);
     return 0;
 }
 
 /**
- * @brief Tests that matrix operations occur as expected, assuming that the dimensions here are all valid, 
- * we are using the expressions in cpp here 
+ * @brief Tests that matrix operations occur as expected, assuming that the dimensions here are all valid,
+ * we are using the expressions in cpp here
  * @param[in] verb - If we should print the results of the debugging
  */
-// void testMatrixOps(bool verb)
-// {
+void testMatrixOverloads(bool verb)
+{
+    std::vector<std::vector<double>> m1 = {{
+                                               1,
+                                               0,
+                                               0,
+                                           },
+                                           {0, 1, 0},
+                                           {0, 0, 1},
+                                           {1, 2, 3}};
+    std::vector<std::vector<double>> m2 = {{
+                                               1,
+                                               1,
+                                               1,
+                                           },
+                                           {1, 1, 1},
+                                           {1, 1, 1},
+                                           {1, 1, 1}};
 
-// }
+    Matrix<double> testMatrix1(&m1);
+    Matrix<double> testMatrix2(&m2);
+
+    // if(verb){
+    //     testMatrix1+&testMatrix2;
+    // }
+}
 
 /**
  * @brief Tests that matrix operations occur as expected, assuming that the dimensions here are all valid
@@ -109,7 +132,7 @@ void testMatrixOps(bool verb)
     std::vector<std::vector<double>> weird1{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     std::vector<std::vector<double>> weird2{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}};
 
-    std::vector<std::vector<double>> threeX2Vec{{10, 11}, {13, 14},{15,16}};
+    std::vector<std::vector<double>> threeX2Vec{{10, 11}, {13, 14}, {15, 16}};
     std::vector<std::vector<double>> twoX2Vec{{10, 11}, {13, 14}};
 
     Matrix<double> matrixDiag1(&diag1);
@@ -126,7 +149,7 @@ void testMatrixOps(bool verb)
     Matrix<double> prod3 = sameValue.prod(&matrixDiag1);
     Matrix<double> prodWeird = weirdMatrix1.prod(&weirdMatrix2);
 
-    Matrix<double> prodOf2By2=threeX2Matrix.prod(&twoX2Matrix);
+    Matrix<double> prodOf2By2 = threeX2Matrix.prod(&twoX2Matrix);
 
     if (verb)
     {

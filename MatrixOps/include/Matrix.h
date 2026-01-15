@@ -1,5 +1,4 @@
 #pragma once
-#include "Matrix.h"
 #include "Vec.h"
 #include <vector>
 #include <cmath>
@@ -83,13 +82,13 @@ public:
 
     // matrix vector ops
 
-    // /**
-    //  * @brief Computes the product between a matrix and another vector v,
-    //  * computes them in order (Current x v)
-    //  * @param[in] m Pointer to another vector
-    //  * @return Resulting matrix from (Current x v)
-    //  */
-    // Matrix prod(Vec *v);
+    /**
+     * @brief Computes the product between a matrix and another vector v,
+     * computes them in order (Current x v)
+     * @param[in] m Pointer to another vector
+     * @return Resulting matrix from (Current x v)
+     */
+    Vec<T> prod(Vec<T> *v);
 
     // accessors
 
@@ -147,7 +146,7 @@ public:
      * @param[in] m matrix to add
      * @return Resulting matrix from the difference of 2 matrices
      */
-    Matrix operator+(Matrix m);
+    Matrix operator+(Matrix *m);
 
     /**
      * @brief Operator overload for difference of 2 matrices
@@ -367,6 +366,37 @@ Matrix<T> Matrix<T>::prod(Matrix<T> *m)
     return nextMatrix;
 }
 
+/**
+ * @brief Computes the product between a matrix and another vector v,
+ * computes them in order (Current x v)
+ * @param[in] m Pointer to another vector
+ * @return Resulting matrix from (Current x v)
+ */
+template <typename T>
+Vec<T> Matrix<T>::prod(Vec<T> *v)
+{
+
+    Vec<T> nextVec = zeros(this->getRow());
+
+    //chooses row 
+    for (size_t j = 0; j < v->size(); j++)
+    {
+
+        T curr = 0;
+
+        // do dot product between rows and cols
+        for (size_t k = 0; k < this->col; k++)
+        {
+            curr += this->at(j, k) * v->at(k);
+        }
+
+        // update new value
+        nextVec.set(j,curr);
+    }
+
+    return nextVec;
+};
+
 ////////////////////
 // Accessors
 ////////////////////
@@ -468,9 +498,9 @@ void Matrix<T>::set(T val, size_t i, size_t j)
  * @return Resulting matrix from the sum of 2 matrices
  */
 template <typename T>
-Matrix<T> Matrix<T>::operator+(Matrix<T> m)
+Matrix<T> Matrix<T>::operator+(Matrix<T> *m)
 {
-    return this->sum(m);
+    return this->sum(*m);
 }
 
 /**
@@ -488,18 +518,8 @@ Matrix<T> Matrix<T>::operator-(Matrix<T> m)
  * @brief Scales elements of the matrix by some calar
  * @param[in] scalar matrix scaled by this value
  */
-// template <typename T>
-// Matrix<T> Matrix<T>::operator*(Matrix<T> m)
-// {
-//     return this->scale(scalar);
-// }
-
-// /**
-//  * @brief Scales elements of the matrix by some calar
-//  * @param[in] scalar matrix scaled by this value
-//  */
-// template <typename T>
-// void Matrix<T>::operator*(T scalar)
-// {
-//     return this->scale(scalar);
-// }
+template <typename T>
+Matrix<T> Matrix<T>::operator*(Matrix<T> m)
+{
+    return this->prod(m);
+}
